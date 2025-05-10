@@ -1,66 +1,118 @@
-**Tool Name:** `AutoVulnScanner`
+# CVE-Scanner: Comprehensive Vulnerability Detection Tool
 
-**README for GitHub:**
+![Network Security](https://images.unsplash.com/photo-1555949963-aa79dcee981c)
 
-# AutoVulnScanner
-
-`AutoVulnScanner` is a Python-based tool designed to automate network vulnerability scanning. The tool uses Nmap to scan a given target (IP or domain) and checks for open ports, services, and known vulnerabilities through its `vuln` script. It simplifies the process of identifying security risks on a network and can be easily customized for various scanning needs.
+An open-source network vulnerability scanner combining Nmap integration with local CVE database lookups for comprehensive security auditing.
 
 ## Features
-- **Port Scanning:** Scans all or specific ports on a target.
-- **Service Detection:** Identifies services running on open ports.
-- **Vulnerability Scanning:** Uses Nmap's `vuln` script to detect common vulnerabilities in services.
-- **Customizable Port Range:** Allows users to specify port ranges (e.g., `1-1000`).
-- **Easy-to-use Command Line Interface (CLI):** Input target IP/domain and port range directly in the terminal.
 
-## Requirements
-- Python 3.x
-- `nmap` Python library (install via `pip install python-nmap`)
-- Nmap installed on your system (download from [nmap.org](https://nmap.org/))
+- **Local CVE Database** - Self-contained vulnerability database using cve-search
+- **Nmap Integration** - Combines network scanning with vulnerability detection
+- **Automated Setup** - One-command installation and configuration
+- **Scheduled Updates** - Automatic CVE database maintenance
+- **Root Privilege Handling** - Automatic escalation prompts
+- **Detailed Reporting** - CVSS scores, CVE links, and service versions
+- **Ethical Warnings** - Built-in authorization checks and disclaimers
 
 ## Installation
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/subrat243/AutoVulnScanner.git
-    cd AutoVulnScanner
-    ```
 
-2. Install required dependencies:
-    ```bash
-    pip install python-nmap
-    pip install shodan
-    ```
+```bash
+# Clone repository
+git clone https://github.com/subrat243/AutoVuln-Scanner.git
+cd AutoVuln-Scanner
+```
+```bash
+# Run with root privileges
+sudo python3 autovuln.py
+```
 
-3. Install Nmap on your system:
-    - For Linux (Ubuntu/Debian):
-      ```bash
-      sudo apt install nmap
-      ```
-
-    - For Windows/macOS, follow the installation instructions at [Nmap Downloads](https://nmap.org/download.html).
+**First Run Setup** (Automated):
+- Installs required system packages
+- Clones cve-search repository (500MB+)
+- Builds local CVE database (30-60 minutes)
+- Performs initial database population
 
 ## Usage
-1. Run the script:
-    ```bash
-    python autovulnscanner.py
-    ```
 
-2. Enter the target IP address or domain when prompted.
-
-3. Enter the port range (e.g., `1-1000` or `1-65535` for all ports).
-
-4. The tool will display information on the target's open ports, services, and detected vulnerabilities.
-
-## Example Output
+### Basic Network Scan
 ```bash
-Enter the target IP or domain: 192.168.1.1
-Enter port range (e.g., 1-1000): 1-1000
-Scanning 192.168.1.1 on ports 1-1000...
-Host: 192.168.1.1 (router.local)
-State: up
-Protocol: tcp
-Port: 22   State: open
-Details: No vulnerabilities found
-Port: 80   State: open
-Details: Vulnerability found (CVE-2021-1234)
+sudo python3 autovuln.py
+```
+Follow prompts to enter target and port range
+
+### Database Update
+```bash
+sudo python3 autovuln.py
+```
+Database updates automatically when older than 7 days
+
+### Advanced Options
+| Parameter          | Description                          | Example              |
+|--------------------|--------------------------------------|----------------------|
+| Target Specification | IP, CIDR, or domain                | 192.168.1.0/24      |
+| Port Range         | Specific ports or ranges            | 80,443,1000-2000    |
+| Verbose Output     | Detailed scan progress              | Built-in logging     |
+
+## Technical Details
+
+### Requirements
+- Python 3.6+
+- 10GB+ disk space
+- Root privileges
+- Internet connection (initial setup)
+
+### Components
+| Component          | Role                                |
+|--------------------|-------------------------------------|
+| Nmap               | Network discovery and service detection |
+| cve-search         | Local CVE database storage and query |
+| Vulners NSE Script | Live vulnerability matching        |
+
+## Ethical Considerations
+
+⚠️ **Important Legal Notice**
+```text
+- Always obtain proper authorization before scanning
+- Network scanning may trigger security alerts
+- This tool should only be used on networks you own
+- Respect all applicable laws and regulations
+```
+
+## Troubleshooting
+
+### Common Issues
+1. **Setup Failure**
+   - Verify internet connection
+   - Ensure sufficient disk space (>10GB free)
+   - Check system logs in /var/log/
+
+2. **Database Update Errors**
+   ```bash
+   rm -rf cve-search/data
+   sudo python3 autovuln.py
+   ```
+
+3. **Scan Timeouts**
+   - Use smaller port ranges
+   - Limit target scope
+   - Check network firewall rules
+
+## Contribution
+
+We welcome community contributions:
+- Report bugs via Issues
+- Submit feature requests
+- Create pull requests
+- Improve documentation
+
+**License**: MIT
+
+---
+
+## References
+
+1. [Nmap Official Documentation](https://nmap.org/docs.html)
+2. [cve-search GitHub](https://github.com/cve-search/cve-search)
+3. [MITRE CVE List](https://cve.mitre.org/)
+
 ```
