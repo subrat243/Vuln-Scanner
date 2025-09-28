@@ -94,4 +94,4 @@ Feel free to open issues or submit pull requests on the repository. All contribu
 
 ## License
 
-This project is licensed under the **MIT License[LICENSE]**.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
