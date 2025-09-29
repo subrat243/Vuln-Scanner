@@ -43,7 +43,7 @@ A Python-based tool to scan networks for vulnerabilities using `nmap`, with opti
 Run the script from your terminal with the required arguments. **Root privileges (`sudo`) are recommended for more accurate nmap scanning.**
 
 ```bash
-sudo python3 vuln_scanner.py -t <targets> -p <ports> [options]
+sudo python3 vuln-scanner.py -t <targets> -p <ports> [options]
 ```
 
 ### Arguments
@@ -63,7 +63,7 @@ sudo python3 vuln_scanner.py -t <targets> -p <ports> [options]
 To scan the `192.168.1.0/24` network on the first 1024 ports, generate both JSON and HTML reports with the prefix `myscan`, you would run:
 
 ```bash
-sudo python3 vuln_scanner.py -t 192.168.1.0/24 -p 1-1024 --json --html -o myscan
+sudo python3 vuln-scanner.py -t 192.168.1.0/24 -p 1-1024 --json --html -o myscan
 ```
 
 ## CVE Database Setup (Optional)
